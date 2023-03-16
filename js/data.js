@@ -7,7 +7,7 @@ var defaultThreads = [
         content: "Thread content",
         comments: [
             {
-                author: "Jack",
+                author: "Isaac",
                 date: Date.now(),
                 content: "Hey there"
             },
