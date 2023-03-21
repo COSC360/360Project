@@ -76,7 +76,7 @@ subscribeButton.addEventListener('click', () => {
 });
 
 document.getElementById('create-post-button').addEventListener('click', () => {
-    window.location.href = `create-post.html?topic=${topic}`;
+    window.location.href = `create-post.html?topic=${encodeURIComponent(topic)}`;
 });
 
 // Render the topic title and posts on page load
