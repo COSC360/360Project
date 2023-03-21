@@ -58,10 +58,13 @@ function generateCommentHTML(comment) {
     `;
 }
 
-function renderPost(postId) {
-    const post = getPostById(postId);
-    const postContainer = document.getElementById('post-container');
-    postContainer.innerHTML = generatePostHTML(post);
+function renderPost(post) {
+    const postContainer = document.getElementById('post');
+    postContainer.innerHTML = `
+        <h2>${post.title}</h2>
+        <p>${post.content}</p>
+        <p><strong>Topic:</strong> <a href="topic.html?topic=${post.topic}">${post.topic}</a></p>
+    `;
 }
 
 function renderComments(postId) {

@@ -19,16 +19,20 @@ const posts = [
 // Function to generate post cards
 function generatePostCard(post) {
     return `
-    <div class="card mb-4">
-        <div class="card-body">
-            <h5 class="card-title">${post.title}</h5>
-            <p class="card-text">${post.content}</p>
-            <p class="card-text">
-                <small class="text-muted">By ${post.author} on ${post.date}</small>
-            </p>
-            <a href="post.html?id=${post.id}" class="btn btn-primary">Read More</a>
-        </div>
-    </div>`;
+        <div class="card mb-3">
+            <div class="card-header">
+                <a href="post.html?id=${post.id}">${post.title}</a>
+                <span class="badge bg-secondary ms-2">Topic: <a href="topic.html?topic=${post.topic}">${post.topic}</a></span>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">${post.title}</h5>
+                <p class="card-text">${post.content}</p>
+                <p class="card-text">
+                    <small class="text-muted">By ${post.author} on ${post.date}</small>
+                </p>
+                <a href="post.html?id=${post.id}" class="btn btn-primary">Read More</a>
+            </div>
+        </div>`;
 }
 
 // Render posts

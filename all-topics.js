@@ -59,3 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTopics();
 });
 
+function getAllTopics() {
+    // Replace this with the actual logic to get the list of topics
+    return ['Topic1', 'Topic2', 'Topic3', 'Topic4'];
+}
+
+// Export the function to be used in other files
+export { getAllTopics };
