@@ -84,7 +84,6 @@ footer div{
 .profile-header {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 .profile-picture {
@@ -95,5 +94,10 @@ footer div{
 }
 
 .username {
-    margin-right: 20px;
+    margin-bottom: 10px;
 }
+
+.bio {
+    margin-bottom: 20px;
+}
+
