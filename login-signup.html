@@ -62,15 +62,15 @@
                         <form id="signup-form">
                             <div class="mb-3">
                                 <label for="signup-username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="signup-username" required>
+                                <input type="text" class="form-control required" id="signup-username" required>
                             </div>
                             <div class="mb-3">
                                 <label for="signup-email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="signup-email" required>
+                                <input type="email" class="form-control required" id="signup-email" required>
                             </div>
                             <div class="mb-3">
                                 <label for="signup-password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="signup-password" required>
+                                <input type="password" class="form-control required" id="signup-password" required>
                             </div>
                             
                         </form>
@@ -85,7 +85,29 @@
     </div>
 
     <script>
-        // Add  JavaScript code to handle form submissions here
+        window.onload = function(){
+
+            document.getElementById("signup-submit").addEventListener("click", function(e){
+                var fields = document.getElementsByClassName("required")
+                var email = fields[0];
+                var user = fields[1];
+                var pass = fields[2];
+        
+                if(email.value == null || email.value == ""){
+                    e.preventDefault();
+                    alert("Enter a valid email");
+                }
+                if(user.value == null || user.value == ""){
+                    e.preventDefault();
+                    alert("Enter a valid username");
+                }
+                if(pass.value == null || pass.value == ""){
+                    e.preventDefault();
+                    alert("Enter a valid password");
+                }
+              });
+        
+        }
     </script>
 </body>
 </html>
