@@ -32,11 +32,11 @@
                         <form id="login-form">
                             <div class="mb-3">
                                 <label for="login-username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="login-username" required>
+                                <input type="text" class="form-control required" id="login-username" required>
                             </div>
                             <div class="mb-3">
                                 <label for="login-password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="login-password" required>
+                                <input type="password" class="form-control required" id="login-password" required>
                             </div>
                         </form>
                     </div>
@@ -85,6 +85,8 @@
     </div>
 
     <script>
+
+        //VALIDATE SIGNUP/LOGIN FORM INPUT
         window.onload = function(){
 
             document.getElementById("signup-submit").addEventListener("click", function(e){
@@ -106,6 +108,25 @@
                     alert("Enter a valid password");
                 }
               });
+
+              window.onload = function(){
+
+                document.getElementById("login-submit").addEventListener("click", function(e){
+                    var fields = document.getElementsByClassName("required")
+                    var email = fields[0];
+                    var pass = fields[1];
+            
+                    if(email.value == null || email.value == ""){
+                        e.preventDefault();
+                        alert("Enter your email");
+                    }
+                    if(pass.value == null || pass.value == ""){
+                        e.preventDefault();
+                        alert("Enter your password");
+                    }
+                  });
+            
+            }
         
         }
     </script>
