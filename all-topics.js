@@ -1,4 +1,13 @@
-const topics = ['Topic1', 'Topic2', 'Topic3'];
+async function fetchTopics() {
+    try {
+        const response = await fetch(API_URL);
+        const topics = await response.json();
+        return topics;
+    } catch (error) {
+        console.error('Error fetching topics:', error);
+        return [];
+    }
+}
 
 function generateTopicListItem(topic) {
     return `
@@ -7,8 +16,9 @@ function generateTopicListItem(topic) {
     </li>`;
 }
 
-function renderTopics() {
+async function renderTopics() {
     const topicsList = document.getElementById('topics-list');
+    const topics = await fetchTopics();
     let topicsHTML = '';
 
     for (const topic of topics) {
@@ -23,47 +33,4 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTopics();
 });
 
-
-
-function isSubscribed(topic) {
-    const subscriptions = JSON.parse(localStorage.getItem('subscriptions') || '[]');
-    return subscriptions.includes(topic);
-}
-
-function toggleSubscription(topic) {
-    const subscriptions = JSON.parse(localStorage.getItem('subscriptions') || '[]');
-    const index = subscriptions.indexOf(topic);
-
-    if (index === -1) {
-        subscriptions.push(topic);
-    } else {
-        subscriptions.splice(index, 1);
-    }
-
-    localStorage.setItem('subscriptions', JSON.stringify(subscriptions));
-}
-
-function generateTopicListItem(topic) {
-    const subscribed = isSubscribed(topic);
-    const buttonText = subscribed ? 'Unsubscribe' : 'Subscribe';
-
-    return `
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        <a href="topic.html?topic=${topic}">${topic}</a>
-        <button class="btn btn-sm btn-outline-primary" onclick="toggleSubscription('${topic}')">${buttonText}</button>
-    </li>`;
-}
-
-// Render the topics on page load
-document.addEventListener('DOMContentLoaded', () => {
-    renderTopics();
-});
-
-
-// function getAllTopics() {
-    // Replace this with the actual logic to get the list of topics
-   // return ['Topic1', 'Topic2', 'Topic3', 'Topic4'];
-//}
-
-// Export the function to be used in other files
-//export { getAllTopics };
+export { renderTopics };

@@ -1,5 +1,4 @@
-import { getAllTopics } from './all-topics.js';
-
+import { renderTopics } from './all-topics.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 const topic = urlParams.get('topic');
