@@ -14,7 +14,7 @@ async function fetchTopics() {
 function generateTopicListItem(topic) {
     return `
     <li class="list-group-item">
-        <a href="topic.html?topic=${topic}">${topic}</a>
+        <a href="topic.html?topic_id=${topic.id}">${topic.title}</a>
     </li>`;
 }
 

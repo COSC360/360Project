@@ -16,7 +16,7 @@ if (mysqli_num_rows($result) == 0) {
 } else {
     while ($row = mysqli_fetch_assoc($result)) {
         echo '<li class="list-group-item">';
-        echo "<a href='topic.php?id={$row['topic_id']}'>{$row['topic_title']}</a>";
+        echo "<a href='topic.html?id={$row['topic_id']}'>{$row['topic_title']}</a>";
         echo '</li>';
     }
 }
