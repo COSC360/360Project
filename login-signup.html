@@ -23,26 +23,26 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                        <h5 class="modal-title" id="loginModalLabel">Log in</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="login-form">
+                        <form id="login-form" action="login.php" method="post">
                             <div class="mb-3">
                                 <label for="login-username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="login-username" required>
+                                <input type="text" class="form-control" id="login-username" name="username" required>
                             </div>
                             <div class="mb-3">
                                 <label for="login-password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="login-password" required>
+                                <input type="password" class="form-control" id="login-password" name="passw" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" id="login-submit">Log in</button>
                             </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="login-submit">Login</button>
                     </div>
                 </div>
             </div>
@@ -62,30 +62,24 @@
                         <form id="signup-form" action="signup.php" method="post">
                             <div class="mb-3">
                                 <label for="signup-username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" required>
+                                <input type="text" class="form-control" id="username" name="username" required>
                             </div>
                             <div class="mb-3">
                                 <label for="signup-email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" required>
+                                <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                             <div class="mb-3">
                                 <label for="signup-password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="passw" required>
+                                <input type="password" class="form-control" id="passw" name="passw" required>
                             </div>
-                        </form>
-                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="signup-submit">Sign up</button>
+                        <button type="submit" class="btn btn-primary" id="signup-submit">Sign up</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // Add  JavaScript code to handle form submissions here
-    </script>
 </body>
 </html>
 

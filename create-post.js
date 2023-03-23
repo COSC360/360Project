@@ -18,15 +18,18 @@ document.getElementById('create-post-form').addEventListener('submit', (e) => {
 
 
 function populateTopicDropdown() {
-    const topics = getAllTopics(); // Use the function from all-topics.js
     const topicSelect = document.getElementById('topic');
 
-    for (const topic of topics) {
-        const option = document.createElement('option');
-        option.value = topic;
-        option.innerText = topic;
-        topicSelect.appendChild(option);
-    }
+    fetch('get_topics.php')
+        .then(response => response.json())
+        .then(topics => {
+            for (const topic of topics) {
+                const option = document.createElement('option');
+                option.value = topic;
+                option.innerText = topic;
+                topicSelect.appendChild(option);
+            }
+        });
 }
 
 // Populate the topic dropdown list on page load
