@@ -1,3 +1,5 @@
+const API_URL = 'topics.php';
+
 async function fetchTopics() {
     try {
         const response = await fetch(API_URL);
