@@ -14,7 +14,7 @@ session_start();
     <header id="masthead">
         <h1>Prompt Hub</h1>
         <div class="right">
-        <?php if (isset($_SESSION['user_id'])): ?>
+        <?php if (isset($_SESSION['u_id'])): ?>
       <a href="#" class="linkbutton">Notifications</a>
       <a href="profile.php" class="linkbutton">My Profile</a>
       <a href="logout.php" class="linkbutton">Logout</a>
@@ -43,7 +43,7 @@ session_start();
         </article>
 
 <main id="center" class="col-md-9">
-<?php if (isset($_SESSION['user_id'])): ?>
+<?php if (isset($_SESSION['u_id'])): ?>
     <h2>Create Post</h2>
     <form id="create-post-form" method="post" action="create-post-function.php?id=<?php echo $_GET['id']; ?>">
         <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">

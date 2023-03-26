@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO posts (topic_id, title, body) VALUES ('$topicId', '$title', '$content')";
 
     if (mysqli_query($conn, $sql)) {
-        header("Location: layout.html");
+        header("Location: index.php");
         exit();
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
