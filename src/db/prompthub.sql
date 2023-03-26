@@ -1,55 +1,9 @@
-CREATE DATABASE prompthub;
-
-CREATE TABLE users (
-    u_id int(11) NOT NULL,
-    username varchar(12) NOT NULL,
-    email varchar(25) NOT NULL,
-    email_confirmed tinyint(1) NOT NULL,
-    passw varchar(500) NOT NULL,
-    profile_pic varchar(500) NOT NULL,
-    profile_desc varchar(500) NOT NULL,
-    created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    admin_status tinyint(1) NOT NULL DEFAULT 0,
-    PRIMARY KEY (u_id)
-);
-
-CREATE TABLE posts (
-    post_id INT NOT NULL,
-    u_id INT NOT NULL,
-    topic_id INT NOT NULL,
-    title VARCHAR(40) NOT NULL,
-    body TEXT,
-    images VARCHAR (8000) DEFAULT NULL,
-    creation_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (post_id), FOREIGN KEY (u_id) REFERENCES users(u_id), FOREIGN KEY(topic_id) REFERENCES topics (topic_id)
-);
-
-CREATE TABLE topics (
-    topic_id INT NOT NULL,
-    topic_title VARCHAR(40) NOT NULL,
-    PRIMARY KEY (topic_id)
-);
-
-CREATE TABLE comments (
-    comment_id int NOT NULL,
-    post_id int not NULL,
-    topic_id int not NULL,
-    user_id int NOT NULL,
-    body text NOT NULL,
-    creation timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE my_topics (
-    topic_id int NOT NULL,
-    user_id int NOT NULL
-);
-
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2023 at 05:59 PM
+-- Generation Time: Mar 26, 2023 at 11:20 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -77,10 +31,18 @@ CREATE TABLE `comments` (
   `comment_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `u_id` int(11) NOT NULL,
   `body` text NOT NULL,
   `creation_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`comment_id`, `post_id`, `topic_id`, `u_id`, `body`, `creation_time`) VALUES
+(0, 0, 0, 0, 'pussy', '2023-03-26 20:57:32'),
+(0, 0, 0, 0, '123', '2023-03-26 21:10:27');
 
 -- --------------------------------------------------------
 
@@ -109,6 +71,13 @@ CREATE TABLE `posts` (
   `creation_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`post_id`, `u_id`, `topic_id`, `title`, `body`, `images`, `creation_time`) VALUES
+(0, 0, 0, 'tst', '123', '', '2023-03-26 19:11:16');
+
 -- --------------------------------------------------------
 
 --
@@ -119,6 +88,13 @@ CREATE TABLE `topics` (
   `topic_id` int(11) NOT NULL,
   `topic_title` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `topics`
+--
+
+INSERT INTO `topics` (`topic_id`, `topic_title`) VALUES
+(0, 'Test Topic');
 
 -- --------------------------------------------------------
 
@@ -137,6 +113,14 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `admin_status` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`u_id`, `username`, `email`, `email_confirmed`, `passw`, `profile_pic`, `profile_bio`, `created_at`, `admin_status`) VALUES
+(1, 'static', 'isaacjoseph2001@gmail.com', 0, '$2y$10$3zwz3WmvyV4b7//t3a1wlepLk00GgEwKN2R84YXYAUn5jKH3OcEMu', '', '', '2023-03-26 19:43:27', 0),
+(2, 'static1', 'isaacjoseph2001@gmail.com', 0, '$2y$10$CVLWwIPdgGlnEOMtVTqu/OoXyXw65tqoQdYvq7pXnvvF8VpygjGNa', '', '', '2023-03-26 21:11:44', 0);
 
 --
 -- Indexes for dumped tables
@@ -159,6 +143,16 @@ ALTER TABLE `topics`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`u_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

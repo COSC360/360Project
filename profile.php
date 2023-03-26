@@ -5,20 +5,21 @@ session_start();
 include 'connection.php';
 
 // Check if the user is logged in
-// if (isset($_SESSION['u_id'])) {
-//     $user_id = $_SESSION['u_id'];
+if (isset($_SESSION['u_id'])) {
+     $user_id = $_SESSION['u_id'];
 
-//     // Fetch user data
-//     $stmt = $conn->prepare("SELECT * FROM users WHERE u_id = ?");
-//     $stmt->bind_param('i', $user_id);
-//     $stmt->execute();
-//     $user_data = $stmt->get_result()->fetch_assoc();
+     // Fetch user data
+     $stmt = $conn->prepare("SELECT * FROM users WHERE u_id = ?");
+     $stmt->bind_param('i', $user_id);
+     $stmt->execute();
+     $user_data = $stmt->get_result()->fetch_assoc();
 
-//     // Fetch user's recent posts
-//     $stmt = $conn->prepare("SELECT * FROM posts WHERE u_id = ? ORDER BY creation_time DESC LIMIT 5");
-//     $stmt->bind_param('i', $user_id);
-//     $stmt->execute();
-//     $recent_posts = $stmt->get_result();
+     // Fetch user's recent posts
+     $stmt = $conn->prepare("SELECT * FROM posts WHERE u_id = ? ORDER BY creation_time DESC LIMIT 5");
+     $stmt->bind_param('i', $user_id);
+     $stmt->execute();
+    $recent_posts = $stmt->get_result();
+}
 // } else {
 //     header('Location: login-signup.php');
 //     exit();
@@ -46,7 +47,7 @@ include 'connection.php';
 <header id="masthead">
 <h1>Prompt Hub</h1>
 <div class="right">
-<?php if (isset($_SESSION['user_id'])): ?>
+<?php if (isset($_SESSION['u_id'])): ?>
       <a href="#" class="linkbutton">Notifications</a>
       <a href="profile.php" class="linkbutton">My Profile</a>
       <a href="logout.php" class="linkbutton">Logout</a>
@@ -76,10 +77,10 @@ include 'connection.php';
 <article id="center">
 <h1>My Profile</h1>
 <div class="profile-header">
-   <img src="<?php echo $user_data['profile_picture']; ?>" alt="Profile Picture" class="profile-picture">
+   <img src="<?php echo $user_data['profile_pic']; ?>" alt="Profile Picture" class="profile-picture">
    <div>
      <h2 class="username"><?php echo $user_data['username']; ?></h2>
-     <p class="bio"><?php echo $user_data['bio']; ?></p>
+     <p class="bio"><?php echo $user_data['profile_bio']; ?></p>
    </div>
    <button id="edit-user-button" class="btn btn-primary">Edit User</button>
 </div>

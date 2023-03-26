@@ -14,7 +14,7 @@ session_start();
 <header id="masthead">
 <h1>Prompt Hub</h1>
 <div class="right">
-<?php if (isset($_SESSION['user_id'])): ?>
+<?php if (isset($_SESSION['u_id'])): ?>
       <a href="#" class="linkbutton">Notifications</a>
       <a href="profile.php" class="linkbutton">My Profile</a>
       <a href="logout.php" class="linkbutton">Logout</a>
