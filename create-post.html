@@ -34,13 +34,7 @@
 
 <main id="center" class="col-md-9">
     <h2>Create Post</h2>
-    <form id="create-post-form">
-        <div class="mb-3">
-            <label for="topic" class="form-label">Topic</label>
-            <select class="form-select" id="topic" name="topic" required>
-                <!-- Topic options will be populated by JavaScript -->
-            </select>
-        </div>
+    <form id="create-post-form" method="post" action="create-post.php">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control" id="title" name="title" required>
@@ -52,7 +46,6 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </main>
-<script src="all-topics.js" type="module"></script>
 <script src="create-post.js" type="module"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
