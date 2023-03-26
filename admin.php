@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
    <meta charset="utf-8">
-   <title>COSC 360 Project</title>
+   <title>PromptHub Admin Portal</title>
    <link rel="stylesheet" href="css/layout.css" />
 </head>
 <body>
@@ -10,28 +10,28 @@
 <h1>Prompt Hub</h1>
 <div class="right">
    <a href="#" class="linkbutton">Notifications</a>
-   <a href="#" class="linkbutton">My Profile</a>
+   <a href="profile.php" class="linkbutton">My Profile</a>
 </div>
 
 </header>
 <div id="main">
 <article id="right-sidebar">
    <div class="left">
-      <a href="#" class="linkbutton"><img src="images/house.png" alt="house" height="70">Home</a>
+      <a href="index.php" class="linkbutton"><img src="images/house.png" alt="house" height="70">Home</a>
    </div>
    <div class="left">
-      <a href="#" class="linkbutton"><img src="images/gear.png" alt="gear" height="70">Admin</a>
+      <a href="admin.php" class="linkbutton"><img src="images/gear.png" alt="gear" height="70">Admin</a>
    </div>
    <div class="left">
-      <a href="#" class="linkbutton"><img src="images/topics.png" alt="topics" height="70">Topics</a>
+      <a href="topics.php" class="linkbutton"><img src="images/topics.png" alt="topics" height="70">Topics</a>
    </div>
    <div class="left">
-   <a href="#" class="linkbutton"><img src="images/star.png" alt="my topics" height="70">My Topics</a>
+   <a href="mytopics.php" class="linkbutton"><img src="images/star.png" alt="my topics" height="70">My Topics</a>
    </div>
 </p>
 </article>
 <article id="center">
-<h1>Trending Posts</h1>
+<h1>Admin Hub</h1>
 <div class="entry">
 </div>
 </article>
