@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,21 +22,22 @@
         <div id="main">
         <article id="right-sidebar">
            <div class="left">
-              <a href="layout.html" class="linkbutton"><img src="images/house.png" alt="house" height="70">Home</a>
+              <a href="index.php" class="linkbutton"><img src="images/house.png" alt="house" height="70">Home</a>
            </div>
            <div class="left">
-              <a href="admin.html" class="linkbutton"><img src="images/gear.png" alt="gear" height="70">Admin</a>
+              <a href="admin.php" class="linkbutton"><img src="images/gear.png" alt="gear" height="70">Admin</a>
            </div>
            <div class="left">
-              <a href="topics.html" class="linkbutton"><img src="images/topics.png" alt="topics" height="70">Topics</a>
+              <a href="topics.php" class="linkbutton"><img src="images/topics.png" alt="topics" height="70">Topics</a>
            </div>
            <div class="left">
-           <a href="mytopics.html" class="linkbutton"><img src="images/star.png" alt="my topics" height="70">My Topics</a>
+           <a href="mytopics.php" class="linkbutton"><img src="images/star.png" alt="my topics" height="70">My Topics</a>
            </div>
         </p>
         </article>
 
 <main id="center" class="col-md-9">
+<?php if (isset($_SESSION['user_id'])): ?>
     <h2>Create Post</h2>
     <form id="create-post-form" method="post" action="create-post-function.php?id=<?php echo $_GET['id']; ?>">
         <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
@@ -46,6 +51,10 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+<?php else: ?>
+   <p>Please <a href="login-signup.php">log in</a> to create a post.</p>
+<?php endif; ?>
+    
 </main>
 <script src="create-post.js" type="module"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($stmt->execute()) {
         $_SESSION["username"] = $username;
-        header("Location: layout.html");
+        header("Location: index.php");
     } else {
         echo "Error: " . $stmt->error;
     }

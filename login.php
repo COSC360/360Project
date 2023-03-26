@@ -4,9 +4,9 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $passw = $_POST['passw'];
 
-    $stmt = $con->prepare("SELECT id, username, password FROM users WHERE username = ?");
+    $stmt = $conn->prepare("SELECT u_id, username, passw FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->store_result();
@@ -15,10 +15,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_result($user_id, $username, $hashed_password);
         $stmt->fetch();
         
-        if (password_verify($password, $hashed_password)) {
+        if (password_verify($passw, $hashed_password)) {
             $_SESSION['user_id'] = $user_id;
             $_SESSION['username'] = $username;
-            header("Location: index.html");
+            header("Location: index.php");
         } else {
             echo "Invalid username or password";
         }
