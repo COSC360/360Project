@@ -10,23 +10,23 @@
 <h1>Prompt Hub</h1>
 <div class="right">
    <a href="#" class="linkbutton">Notifications</a>
-   <a href="profile.html" class="linkbutton">My Profile</a>
+   <a href="profile.php" class="linkbutton">My Profile</a>
 </div>
 
 </header>
 <div id="main">
 <article id="right-sidebar">
    <div class="left">
-      <a href="layout.html" class="linkbutton"><img src="images/house.png" alt="house" height="70">Home</a>
+      <a href="index.php" class="linkbutton"><img src="images/house.png" alt="house" height="70">Home</a>
    </div>
    <div class="left">
-      <a href="admin.html" class="linkbutton"><img src="images/gear.png" alt="gear" height="70">Admin</a>
+      <a href="admin.php" class="linkbutton"><img src="images/gear.png" alt="gear" height="70">Admin</a>
    </div>
    <div class="left">
-      <a href="topics.html" class="linkbutton"><img src="images/topics.png" alt="topics" height="70">Topics</a>
+      <a href="topics.php" class="linkbutton"><img src="images/topics.png" alt="topics" height="70">Topics</a>
    </div>
    <div class="left">
-   <a href="mytopics.html" class="linkbutton"><img src="images/star.png" alt="my topics" height="70">My Topics</a>
+   <a href="mytopics.php" class="linkbutton"><img src="images/star.png" alt="my topics" height="70">My Topics</a>
    </div>
 </p>
 </article>
