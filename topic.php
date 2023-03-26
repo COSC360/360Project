@@ -78,10 +78,6 @@
         // Output posts as HTML
         while ($row = $result->fetch_assoc()) {
             echo '<div class="card mb-3">';
-            // echo '<div class="card-header">';
-            // echo '<a href="post.php?id=' . $row['post_id'] . '&topic_id=' . $row['topic_id'] . '">' . $row['title'] . '</a>';
-            // echo '<span class="badge bg-secondary ms-2">Topic: <a href="topic.php?id=' . $row['topic_id'] . '">' . $topicName . '</a></span>';
-            // echo '</div>';
             echo '<div class="card-body">';
             echo '<h5 class="card-title">' . $row['title'] . '</h5>';
             echo '<p class="card-text">' . $row['body'] . '</p>';

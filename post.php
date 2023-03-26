@@ -60,16 +60,29 @@
         // Output error message
         echo '<p>Post not found.</p>';
     }
+    $sql = "SELECT * FROM comments WHERE post_id = $postId";
+    $result = $conn->query($sql);
 
+    if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="card mb-3">';
+        echo '<div class="card-body">';
+        echo '<p class="card-text">' . $row['body'] . '</p>';
+        echo '<p class="card-text"><small class="text-muted">By ' . $row['u_id'] . ' on ' . $row['creation_time'] . '</small></p>';
+        echo '</div></div>';
+    }
+}
     $conn->close();
 ?>
-            <form id="comment-form">
-                <div class="mb-3">
-                    <label for="comment" class="form-label">Leave a comment:</label>
-                    <textarea class="form-control" id="comment" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+        <form id="comment-form" method="post" action="create-comment.php">
+    <input type="hidden" name="id" value="<?php echo $postId; ?>">
+    <input type="hidden" name="topic_id" value="<?php echo $topicId; ?>">
+    <div class="mb-3">
+        <label for="comment" class="form-label">Leave a comment:</label>
+        <textarea class="form-control" id="comment" name="body" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" form="comment-form">Submit</button>
+</form>
         </main>
     </div>
 </div>
@@ -80,9 +93,5 @@
         <p>&copy; Copyright 2023 COSC 360 Prompt Hub Group</p>
     </div>
 </footer>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-<script src="post.js"></script>
 </body>
 </html>
