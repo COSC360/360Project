@@ -5,24 +5,24 @@ session_start();
 include 'connection.php';
 
 // Check if the user is logged in
-if (isset($_SESSION['u_id'])) {
-    $user_id = $_SESSION['u_id'];
+// if (isset($_SESSION['u_id'])) {
+//     $user_id = $_SESSION['u_id'];
 
-    // Fetch user data
-    $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
-    $stmt->bind_param('i', $user_id);
-    $stmt->execute();
-    $user_data = $stmt->get_result()->fetch_assoc();
+//     // Fetch user data
+//     $stmt = $conn->prepare("SELECT * FROM users WHERE u_id = ?");
+//     $stmt->bind_param('i', $user_id);
+//     $stmt->execute();
+//     $user_data = $stmt->get_result()->fetch_assoc();
 
-    // Fetch user's recent posts
-    $stmt = $conn->prepare("SELECT * FROM posts WHERE u_id = ? ORDER BY creation_time DESC LIMIT 5");
-    $stmt->bind_param('i', $user_id);
-    $stmt->execute();
-    $recent_posts = $stmt->get_result();
-} else {
-    header('Location: login-signup.php');
-    exit();
-}
+//     // Fetch user's recent posts
+//     $stmt = $conn->prepare("SELECT * FROM posts WHERE u_id = ? ORDER BY creation_time DESC LIMIT 5");
+//     $stmt->bind_param('i', $user_id);
+//     $stmt->execute();
+//     $recent_posts = $stmt->get_result();
+// } else {
+//     header('Location: login-signup.php');
+//     exit();
+// }
 
 
 ?>
