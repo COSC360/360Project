@@ -61,7 +61,7 @@
 ?>
   </h2>
   <button id="subscribe-button" class="btn btn-primary mb-2">Subscribe</button>
-  <a href="create-post.html" class="btn btn-secondary mb-2">Create Post</a>
+  <a href="create-post.php?id=<?php echo $topicId; ?>" class="btn btn-secondary mb-2">Create Post</a>
 
   <?php
     
