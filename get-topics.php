@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 include "connection.php";
 $query = "SELECT * FROM topics";
 $result = mysqli_query($conn, $query);

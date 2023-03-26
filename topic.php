@@ -10,8 +10,14 @@
 <header id="masthead">
 <h1>Prompt Hub</h1>
 <div class="right">
-   <a href="#" class="linkbutton">Notifications</a>
-   <a href="profile.html" class="linkbutton">My Profile</a>
+<?php if (isset($_SESSION['user_id'])): ?>
+      <a href="#" class="linkbutton">Notifications</a>
+      <a href="profile.php" class="linkbutton">My Profile</a>
+      <a href="logout.php" class="linkbutton">Logout</a>
+   <?php else: ?>
+      <a href="login-signup.php" class="linkbutton">Notifications</a>
+      <a href="login-signup.php" class="linkbutton">My Profile</a>
+   <?php endif; ?>
 </div>
 
 </header>
