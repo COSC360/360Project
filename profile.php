@@ -34,12 +34,14 @@ if (isset($_SESSION['u_id'])) {
    <meta charset="utf-8">
    
    <title>My Profile</title>
-   <script src="js/profile.js"></script>
+   
    <link rel="stylesheet" href="css/layout.css" />
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+
     
 </head>
 
@@ -82,7 +84,9 @@ if (isset($_SESSION['u_id'])) {
      <h2 class="username"><?php echo $user_data['username']; ?></h2>
      <p class="bio"><?php echo $user_data['profile_bio']; ?></p>
    </div>
-   <button id="edit-user-button" class="btn btn-primary">Edit User</button>
+   <button id="edit-user-button" class="btn btn-primary" data-toggle="modal" data-target="#edit-user-modal">Edit User</button>
+
+
 </div>
 
 
@@ -108,8 +112,8 @@ if (isset($_SESSION['u_id'])) {
       <p>&copy; Copyright 2023 COSC 360 Prompt Hub Group
    </div>
 </footer>
- <!-- Edit User Modal -->
- <div class="modal" tabindex="-1" role="dialog" id="edit-user-modal">
+<!-- Edit User Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="edit-user-modal">
    <div class="modal-dialog" role="document">
      <div class="modal-content">
        <div class="modal-header">
@@ -121,23 +125,22 @@ if (isset($_SESSION['u_id'])) {
        <div class="modal-body">
          <form id="edit-user-form">
            <!-- Add form fields for username, profile picture, email, and bio -->
-<form id="edit-user-form">
-   <div class="form-group">
-       <label for="username">Username</label>
-       <input type="text" class="form-control" id="username" name="username" value="<?php echo $user_data['username']; ?>" required>
-   </div>
-   <div class="form-group">
-       <label for="profile_picture">Profile Picture</label>
-       <input type="file" class="form-control" id="profile_picture" name="profile_picture">
-   </div>
-   <div class="form-group">
-       <label for="email">Email</label>
-       <input type="email" class="form-control" id="email" name="email" value="<?php echo $user_data['email']; ?>" required>
-   </div>
-   <div class="form-group">
-       <label for="bio">Bio</label>
-       <textarea class="form-control" id="bio" name="bio" rows="3"><?php echo $user_data['bio']; ?></textarea>
-   </div>
+           <div class="form-group">
+               <label for="username">Username</label>
+               <input type="text" class="form-control" id="username" name="username" value="<?php echo $user_data['username']; ?>" required>
+           </div>
+           <div class="form-group">
+               <label for="profile_picture">Profile Picture</label>
+               <input type="file" class="form-control" id="profile_picture" name="profile_picture">
+           </div>
+           <div class="form-group">
+               <label for="email">Email</label>
+               <input type="email" class="form-control" id="email" name="email" value="<?php echo $user_data['email']; ?>" required>
+           </div>
+           <div class="form-group">
+               <label for="bio">Bio</label>
+               <textarea class="form-control" id="profile_bio" name="bio" rows="3"><?php echo $user_data['profile_bio']; ?></textarea>
+           </div>
          </form>
        </div>
        <div class="modal-footer">
@@ -147,12 +150,14 @@ if (isset($_SESSION['u_id'])) {
      </div>
    </div>
  </div>
-// AJAX to update user:
+
+
+ 
  <script>
-   document.getElementById('edit-user-form').addEventListener('submit', function (e) {
+document.getElementById('save-changes-button').addEventListener('click', function (e) {
   e.preventDefault();
 
-  const formData = new FormData(e.target);
+  const formData = new FormData(document.getElementById('edit-user-form'));
   fetch('update_user.php', {
     method: 'POST',
     body: formData,
@@ -166,6 +171,9 @@ if (isset($_SESSION['u_id'])) {
 
         // Close the modal
         $('#edit-user-modal').modal('hide');
+
+        // Refresh the page
+        location.reload();
       } else {
         alert('Error updating user data');
       }
@@ -174,6 +182,8 @@ if (isset($_SESSION['u_id'])) {
       console.error('Error:', error);
     });
 });
+
+
 
  </script>
 </body>
