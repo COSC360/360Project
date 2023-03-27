@@ -1,5 +1,4 @@
 <?php
-//session_start();
 include "connection.php";
 $query = "SELECT * FROM topics";
 $result = mysqli_query($conn, $query);
@@ -11,7 +10,6 @@ if (mysqli_num_rows($result) == 0) {
         echo "Error adding topic: " . mysqli_error($conn);
     }
     
-    // Close the database connection
     mysqli_close($conn);
 } else {
     while ($row = mysqli_fetch_assoc($result)) {
@@ -21,6 +19,5 @@ if (mysqli_num_rows($result) == 0) {
     }
 }
 
-// Close the database connection
 mysqli_close($conn);
 ?>
