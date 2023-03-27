@@ -7,57 +7,54 @@ session_start();
 <head>
     <meta charset="utf-8">
     <title>Post - COSC 360 Project</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/layout.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 <header id="masthead" class="bg-primary text-white py-3">
     <h1>Prompt Hub</h1>
     <div class="right">
-    <?php if (isset($_SESSION['u_id'])): ?>
-      <a href="#" class="linkbutton">Notifications</a>
-      <a href="profile.php" class="linkbutton">My Profile</a>
-      <a href="logout.php" class="linkbutton">Logout</a>
-   <?php else: ?>
-      <a href="login-signup.php" class="linkbutton">Notifications</a>
-      <a href="login-signup.php" class="linkbutton">My Profile</a>
-   <?php endif; ?>
+        <?php if (isset($_SESSION['u_id'])): ?>
+            <a href="#" class="linkbutton">Notifications</a>
+            <a href="profile.php" class="linkbutton">My Profile</a>
+            <a href="logout.php" class="linkbutton">Logout</a>
+        <?php else: ?>
+            <a href="login-signup.php" class="linkbutton">Notifications</a>
+            <a href="login-signup.php" class="linkbutton">My Profile</a>
+        <?php endif; ?>
     </div>
-    
-    </header>
-    <div id="main">
+</header>
+<div id="main">
     <article id="right-sidebar">
        <div class="left">
           <a href="index.php" class="linkbutton"><img src="images/house.png" alt="house" height="70">Home</a>
        </div>
        <?php if (isset($_SESSION['admin_status']) && $_SESSION['admin_status'] == 1): ?>
-   <div class="left">
-      <a href="admin.php" class="linkbutton"><img src="images/gear.png" alt="gear" height="70">Admin</a>
-   </div>
-   <?php endif; ?>
-       <div class="left">
-          <a href="topics.php" class="linkbutton"><img src="images/topics.png" alt="topics" height="70">Topics</a>
-       </div>
-       <div class="left">
-       <a href="mytopics.php" class="linkbutton"><img src="images/star.png" alt="my topics" height="70">My Topics</a>
-       </div>
-    </p>
+            <div class="left">
+                <a href="admin.php" class="linkbutton"><img src="images/gear.png" alt="gear" height="70">Admin</a>
+            </div>
+        <?php endif; ?>
+            <div class="left">
+                <a href="topics.php" class="linkbutton"><img src="images/topics.png" alt="topics" height="70">Topics</a>
+            </div>
+        <div class="left">
+            <a href="mytopics.php" class="linkbutton"><img src="images/star.png" alt="my topics" height="70">My Topics</a>
+        </div>
     </article>
-        <main id="center" class="col-md-9">
-        <?php
+    <main id="center" class="col-md-9">
+    <?php
     
     include "connection.php";
-    // Get the post ID and topic ID from the URL
     $postId = $_GET['id'];
     $topicId = $_GET['topic_id'];
 
-    // Fetch post data from server
     $sql = "SELECT * FROM posts WHERE post_id = $postId AND topic_id = $topicId";
     $result = $conn->query($sql);
 
-    // Check if post exists
     if ($result->num_rows > 0) {
-        // Output post content
         $row = $result->fetch_assoc();
         echo '<div class="card mb-3">';
         echo '<div class="card-header">';
@@ -69,34 +66,33 @@ session_start();
         echo '<p class="card-text"><small class="text-muted">By ' . $row['u_id'] . ' on ' . $row['creation_time'] . '</small></p>';
         echo '</div></div>';
     } else {
-        // Output error message
         echo '<p>Post not found.</p>';
     }
     $sql = "SELECT * FROM comments WHERE post_id = $postId";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo '<div class="card mb-3">';
-        echo '<div class="card-body">';
-        echo '<p class="card-text">' . $row['body'] . '</p>';
-        echo '<p class="card-text"><small class="text-muted">By ' . $row['u_id'] . ' on ' . $row['creation_time'] . '</small></p>';
-        echo '</div></div>';
+        while ($row = $result->fetch_assoc()) {
+            echo '<div class="card mb-3">';
+            echo '<div class="card-body">';
+            echo '<p class="card-text">' . $row['body'] . '</p>';
+            echo '<p class="card-text"><small class="text-muted">By ' . $row['u_id'] . ' on ' . $row['creation_time'] . '</small></p>';
+            echo '</div></div>';
+        }
     }
-}
     $conn->close();
-?>
-        <form id="comment-form" method="post" action="create-comment.php">
-    <input type="hidden" name="id" value="<?php echo $postId; ?>">
-    <input type="hidden" name="topic_id" value="<?php echo $topicId; ?>">
-    <div class="mb-3">
-        <label for="comment" class="form-label">Leave a comment:</label>
-        <textarea class="form-control" id="comment" name="body" rows="3"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary" form="comment-form">Submit</button>
-</form>
-        </main>
-    </div>
+    ?>
+    <form id="comment-form" method="post" action="create-comment.php">
+        <input type="hidden" name="id" value="<?php echo $postId; ?>">
+        <input type="hidden" name="topic_id" value="<?php echo $topicId; ?>">
+
+        <div class="mb-3">
+            <label for="comment" class="form-label">Leave a comment:</label>
+            <textarea class="form-control" id="comment" name="body" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" form="comment-form">Submit</button>
+    </form>
+    </main>
 </div>
 <footer class="bg-primary text-white text-center py-3">
     <div class="footer-section">

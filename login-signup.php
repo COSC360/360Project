@@ -14,28 +14,28 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script>
 		function validateSignup() {
-			var password = document.getElementById("passw").value;
-    var passwordCheck = document.getElementById("passw-check").value;
-    var username = document.getElementById("username").value;
-    
-    if (password != passwordCheck) {
-        alert("Passwords do not match.");
-        return false;
-    }
-    if (password.length < 8) {
-        alert("Password must be at least 8 characters.");
-        return false;
-    }
-    if (username.includes(" ")) {
-        alert("Username cannot contain spaces.");
-        return false;
-    }
-    if (password.includes(" ")) {
-        alert("Password cannot contain spaces.");
-        return false;
-    }
-    return true;
-		}
+		var password = document.getElementById("passw").value;
+        var passwordCheck = document.getElementById("passw-check").value;
+        var username = document.getElementById("username").value;
+        
+        if (password != passwordCheck) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        if (password.length < 8) {
+            alert("Password must be at least 8 characters.");
+            return false;
+        }
+        if (username.includes(" ")) {
+            alert("Username cannot contain spaces.");
+            return false;
+        }
+        if (password.includes(" ")) {
+            alert("Password cannot contain spaces.");
+            return false;
+        }
+        return true;
+        }
 	</script>
 </head>
 <body>
@@ -46,8 +46,6 @@ session_start();
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
             Sign up
         </button>
-
-        <!-- Login Modal -->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -77,7 +75,6 @@ session_start();
             </div>
         </div>
 
-        <!-- Signup Modal -->
         <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -115,4 +112,3 @@ session_start();
     </div>
 </body>
 </html>
-

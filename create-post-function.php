@@ -6,14 +6,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $content = $_POST['body'];
     $topicId = $_GET['id'];
 
-    // Insert post into database
     $sql = "INSERT INTO posts (topic_id, title, body) VALUES ('$topicId', '$title', '$content')";
 
     if (mysqli_query($conn, $sql)) {
         header("Location: index.php");
         exit();
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        echo $sql . "<br>" . mysqli_error($conn);
     }
 
     mysqli_close($conn);
