@@ -12,6 +12,31 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script>
+		function validateSignup() {
+			var password = document.getElementById("passw").value;
+    var passwordCheck = document.getElementById("passw-check").value;
+    var username = document.getElementById("username").value;
+    
+    if (password != passwordCheck) {
+        alert("Passwords do not match.");
+        return false;
+    }
+    if (password.length < 8) {
+        alert("Password must be at least 8 characters.");
+        return false;
+    }
+    if (username.includes(" ")) {
+        alert("Username cannot contain spaces.");
+        return false;
+    }
+    if (password.includes(" ")) {
+        alert("Password cannot contain spaces.");
+        return false;
+    }
+    return true;
+		}
+	</script>
 </head>
 <body>
     <div class="container">
@@ -63,7 +88,7 @@ session_start();
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="signup-form" action="signup.php" method="post">
+                        <form id="signup-form" action="signup.php" method="post" onsubmit="return validateSignup()">
                             <div class="mb-3">
                                 <label for="signup-username" class="form-label">Username</label>
                                 <input type="text" class="form-control" id="username" name="username" required>
@@ -75,6 +100,10 @@ session_start();
                             <div class="mb-3">
                                 <label for="signup-password" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="passw" name="passw" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signup-password-check" class="form-label">Re-enter password</label>
+                                <input type="password" class="form-control" id="passw-check" name="passw-check" required>
                             </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
