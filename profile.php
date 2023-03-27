@@ -79,7 +79,7 @@ if (isset($_SESSION['u_id'])) {
 <article id="center">
 <h1>My Profile</h1>
 <div class="profile-header">
-   <img src="<?php echo $user_data['profile_pic']; ?>" alt="Profile Picture" class="profile-picture">
+<img src="<?php echo $user_data['profile_pic']; ?>" alt="Profile Picture" class="profile-picture">
    <div>
      <h2 class="username"><?php echo $user_data['username']; ?></h2>
      <p class="bio"><?php echo $user_data['profile_bio']; ?></p>
@@ -154,6 +154,35 @@ if (isset($_SESSION['u_id'])) {
 
  
  <script>
+// document.getElementById('save-changes-button').addEventListener('click', function (e) {
+//   e.preventDefault();
+
+//   const formData = new FormData(document.getElementById('edit-user-form'));
+//   fetch('update_user.php', {
+//     method: 'POST',
+//     body: formData,
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       if (data.success) {
+//         // Update the displayed user data
+//         document.querySelector('.username').textContent = formData.get('username');
+//         document.querySelector('.bio').textContent = formData.get('bio');
+
+//         // Close the modal
+//         $('#edit-user-modal').modal('hide');
+
+//         // Refresh the page
+//         location.reload();
+//       } else {
+//         alert('Error updating user data');
+//       }
+//     })
+//     .catch((error) => {
+//       //console.error('Error:', error);
+//     });
+// });
+
 document.getElementById('save-changes-button').addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -162,7 +191,12 @@ document.getElementById('save-changes-button').addEventListener('click', functio
     method: 'POST',
     body: formData,
   })
-    .then((response) => response.json())
+    .then((response) => {
+      return response.text().then((text) => {
+        console.log("Raw server response:", text);
+        return JSON.parse(text);
+      });
+    })
     .then((data) => {
       if (data.success) {
         // Update the displayed user data
@@ -182,6 +216,8 @@ document.getElementById('save-changes-button').addEventListener('click', functio
       console.error('Error:', error);
     });
 });
+
+
 
 
 

@@ -8,9 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $passw =  $_REQUEST['passw'];
 
     $hashed_password = password_hash($passw, PASSWORD_BCRYPT);
+    $default_profile_pic = './uploads/profile_pics/profile-picture-placeholder.png';
 
-    $stmt = $conn->prepare("INSERT INTO users (username, email, passw) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username, $email, $hashed_password);
+    $stmt = $conn->prepare("INSERT INTO users (username, email, passw, profile_pic) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $username, $email, $hashed_password, $default_profile_pic);
     
     if ($stmt->execute()) {
         $_SESSION["username"] = $username;
