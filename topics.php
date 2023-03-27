@@ -30,9 +30,11 @@ session_start();
    <div class="left">
       <a href="index.php" class="linkbutton"><img src="images/house.png" alt="house" height="70">Home</a>
    </div>
+   <?php if (isset($_SESSION['admin_status']) && $_SESSION['admin_status'] == 1): ?>
    <div class="left">
       <a href="admin.php" class="linkbutton"><img src="images/gear.png" alt="gear" height="70">Admin</a>
    </div>
+   <?php endif; ?>
    <div class="left">
       <a href="topics.php" class="linkbutton"><img src="images/topics.png" alt="topics" height="70">Topics</a>
    </div>

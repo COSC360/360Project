@@ -5,6 +5,7 @@ session_start();
 header('Content-Type: application/json');
 include 'connection.php';
 
+//this code would not work correctly to upload profile pictures ignore this block
 // if (isset($_SESSION['u_id']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 //     $user_id = $_SESSION['u_id'];
 //     $username = $_POST['username'];
