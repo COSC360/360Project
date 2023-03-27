@@ -84,6 +84,8 @@ session_start();
                echo '<p class="card-text"><small class="text-muted">By ' . $row['u_id'] . ' on ' . $row['creation_time'] . '</small></p>';
                echo '<a href="post.php?id=' . $row['post_id'] . '&topic_id=' . $row['topic_id'] . '" class="btn btn-primary">Read More</a>';
                echo '</div></div>';
+
+               
          }
       } else {
          echo '<p>No posts found.</p>';

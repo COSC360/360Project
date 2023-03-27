@@ -1,6 +1,5 @@
 <?php
 session_start();
-// Check if the user is logged in and an admin
 if (!isset($_SESSION['u_id']) || !isset($_SESSION['admin_status']) || $_SESSION['admin_status'] == 0) {
    header("Location: index.php");
    exit;
@@ -52,6 +51,28 @@ if (!isset($_SESSION['u_id']) || !isset($_SESSION['admin_status']) || $_SESSION[
       <article id="center">
          <h1>Admin Hub</h1>
          <div class="entry">
+            <?php
+            include "connection.php";
+            $stmt = $conn->prepare("SELECT post_id, title, body, creation_time FROM posts ORDER BY creation_time DESC");
+            $stmt->execute();
+            $stmt->bind_result($post_id, $post_title, $post_content, $created_at);
+
+            echo "<h1>Admin: Manage Posts</h1>";
+            echo "<table>";
+            echo "<tr><th>Title</th><th>Content</th><th>Created at</th><th>Delete</th></tr>";
+
+            while ($stmt->fetch()) {
+               echo "<tr>";
+               echo "<td>" . htmlspecialchars($post_title) . "</td>";
+               echo "<td>" . htmlspecialchars($post_content) . "</td>";
+               echo "<td>" . htmlspecialchars($created_at) . "</td>";
+               echo "<td><a href='delete_post.php?post_id=" . $post_id . "'>Delete</a></td>";
+               echo "</tr>";
+            }
+            echo "</table>";
+            $stmt->close();
+            $conn->close();
+            ?>
          </div>
       </article>
    </div>
