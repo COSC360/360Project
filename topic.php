@@ -66,6 +66,7 @@ session_start();
       echo "Topic: " . $topicName;
       ?>
       </h2>
+      
       <button id="subscribe-button" class="btn btn-primary mb-2">Subscribe</button>
       <a href="create-post.php?id=<?php echo $topicId; ?>" class="btn btn-secondary mb-2">Create Post</a>
 
@@ -84,8 +85,6 @@ session_start();
                echo '<p class="card-text"><small class="text-muted">By ' . $row['u_id'] . ' on ' . $row['creation_time'] . '</small></p>';
                echo '<a href="post.php?id=' . $row['post_id'] . '&topic_id=' . $row['topic_id'] . '" class="btn btn-primary">Read More</a>';
                echo '</div></div>';
-
-               
          }
       } else {
          echo '<p>No posts found.</p>';

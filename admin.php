@@ -74,6 +74,32 @@ if (!isset($_SESSION['u_id']) || !isset($_SESSION['admin_status']) || $_SESSION[
             $conn->close();
             ?>
          </div>
+         <div class="entry">
+            <?php
+            include "connection.php";
+            $stmt = $conn->prepare("SELECT u_id, username, email, admin_status FROM users");
+            $stmt->execute();
+            $stmt->bind_result($u_id, $username, $email, $admin_status);
+
+            echo "<h1>Admin: Manage Users</h1>";
+            echo "<table>";
+            echo "<tr><th>Username</th><th>Email</th><th>Admin Status</th><th>Delete</th><th>Promote/Demote</th></tr>";
+
+            while ($stmt->fetch()) {
+               echo "<tr>";
+               echo "<td>" . htmlspecialchars($username) . "</td>";
+               echo "<td>" . htmlspecialchars($email) . "</td>";
+               echo "<td>" . ($admin_status == 1 ? "Admin" : "User") . "</td>";
+               echo "<td><a href='delete_user.php?u_id=" . $u_id . "'>Delete</a></td>";
+               echo "<td><a href='toggle_admin.php?u_id=" . $u_id . "'>" . ($admin_status == 1 ? "Demote" : "Promote") . "</a></td>";
+               echo "</tr>";
+            }
+
+            echo "</table>";
+            $stmt->close();
+            $conn->close();
+            ?>
+         </div>
       </article>
    </div>
    <footer>
