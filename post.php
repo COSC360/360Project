@@ -87,12 +87,16 @@ session_start();
     <form id="comment-form" method="post" action="create-comment.php">
         <input type="hidden" name="id" value="<?php echo $postId; ?>">
         <input type="hidden" name="topic_id" value="<?php echo $topicId; ?>">
+   <?php if (isset($_SESSION['u_id'])): ?>
     
         <div class="mb-3">
             <label for="comment" class="form-label">Leave a comment:</label>
             <textarea class="form-control" id="comment" name="body" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary" form="comment-form">Submit</button>
+   <?php else: ?>
+    <p>Please <a href="login-signup.php">log in</a> to comment.</p>
+   <?php endif; ?>
     </form>
     </main>
     </div>
