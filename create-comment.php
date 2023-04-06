@@ -16,6 +16,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo $sql . "<br>" . mysqli_error($conn);
     }
 }
-
 $conn->close();
 ?>

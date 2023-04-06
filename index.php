@@ -12,6 +12,21 @@ session_start();
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+   <script>
+      $(document).ready(function() {
+         $("#search-button").click(function() {
+            var keyword = $("#search-input").val();
+            $.ajax({
+               url: "search-posts.php",
+               method: "POST",
+               data: { keyword: keyword },
+               success: function(data) {
+                  $("#posts-container").html(data);
+               }
+            });
+         });
+      });
+   </script>
 </head>
 <body>
    <header id="masthead">
@@ -46,7 +61,10 @@ session_start();
       </article>
       <article id="center" class="col-md-9">
          <h1>Trending Posts</h1>
-         <input type="text" id="search-input" class="form-control mb-4" placeholder="Search posts by title...">
+         <div class="input-group mb-4">
+            <input type="text" id="search-input" class="form-control" placeholder="Search posts by title...">
+            <button class="btn btn-primary" id="search-button">Search</button>
+         </div>
          <div id="posts-container">
          </div>
       </article>

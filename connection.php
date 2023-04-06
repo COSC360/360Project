@@ -1,4 +1,9 @@
 <?php   
+// $DATABASE_HOST = 'localhost';
+// $DATABASE_USER = '41797044';
+// $DATABASE_PASS = '41797044';
+// $DATABASE_NAME = 'db_41797044';
+
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';

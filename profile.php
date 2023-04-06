@@ -76,7 +76,7 @@ if (isset($_SESSION['u_id'])) {
     <?php while ($post = $recent_posts->fetch_assoc()): ?>
         <div class="post">
             <h3><?php echo $post['title']; ?></h3>
-            <p><?php echo $post['content']; ?></p>
+            <p><?php echo $post['body']; ?></p>
         </div>
     <?php endwhile; ?>
   </div>
@@ -99,7 +99,7 @@ if (isset($_SESSION['u_id'])) {
         </button>
       </div>
       <div class="modal-body">
-        <form id="edit-user-form">
+        <form id="edit-user-form" action="upload-image.php" method="POST" enctype="multipart/form-data">
           <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" name="username" value="<?php echo $user_data['username']; ?>" required>
