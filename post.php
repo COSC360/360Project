@@ -51,7 +51,6 @@ session_start();
     $postId = $_GET['id'];
     $topicId = $_GET['topic_id'];
     
-    // Get the post details and the username of the user who created it
     $sql = "SELECT posts.*, users.username FROM posts JOIN users ON posts.u_id = users.u_id WHERE post_id = $postId AND topic_id = $topicId";
     $result = $conn->query($sql);
     
@@ -69,7 +68,6 @@ session_start();
     } else {
         echo '<p>Post not found.</p>';
     }
-    // Get the comments and the username of the users who created them
     $sql = "SELECT comments.*, users.username FROM comments JOIN users ON comments.u_id = users.u_id WHERE post_id = $postId";
     $result = $conn->query($sql);
     
