@@ -75,7 +75,7 @@ if (isset($_SESSION['u_id'])) {
         <div class="post">
             <h3><?php echo $post['title']; ?></h3>
             <p><?php echo $post['body']; ?></p>
-        </div>
+    </div>
     <?php endwhile; ?>
   </div>
   </article>
