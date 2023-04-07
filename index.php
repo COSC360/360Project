@@ -64,7 +64,7 @@ session_start();
             <button class="btn btn-primary" id="search-button">Search</button>
          </div>
          <div id="posts-container">
-    <?php include 'connection.php'; echo fetch_recent_posts($conn); ?>
+    <?php include 'trending.php'; echo fetch_recent_posts($conn); ?>
 </div>
 
       </article>
