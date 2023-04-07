@@ -33,12 +33,10 @@ session_start();
    <a href="index.php" class="linkbutton"><img src="images/PromptHub.png" alt="logo" height="70"></a>
    <div class="right">
       <?php if (isset($_SESSION['u_id'])): ?>
-         <a href="#" class="linkbutton">Notifications</a>
          <a href="profile.php" class="linkbutton">My Profile</a>
          <a href="logout.php" class="linkbutton">Logout</a>
       <?php else: ?>
-         <a href="login-signup.php" class="linkbutton">Notifications</a>
-         <a href="login-signup.php" class="linkbutton">My Profile</a>
+         <a href="login-signup.php" class="linkbutton">Login / Signup</a>
       <?php endif; ?>
    </div>
    </header>
@@ -66,7 +64,9 @@ session_start();
             <button class="btn btn-primary" id="search-button">Search</button>
          </div>
          <div id="posts-container">
-         </div>
+    <?php include 'connection.php'; echo fetch_recent_posts($conn); ?>
+</div>
+
       </article>
    </div>
    <footer>
