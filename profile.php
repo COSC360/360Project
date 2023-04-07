@@ -4,18 +4,23 @@ session_start();
 include 'connection.php';
 
 if (isset($_SESSION['u_id'])) {
-     $user_id = $_SESSION['u_id'];
+    $user_id = $_SESSION['u_id'];
 
-     $stmt = $conn->prepare("SELECT * FROM users WHERE u_id = ?");
-     $stmt->bind_param('i', $user_id);
-     $stmt->execute();
-     $user_data = $stmt->get_result()->fetch_assoc();
+    $stmt = $conn->prepare("SELECT * FROM users WHERE u_id = ?");
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
+    $user_data = $stmt->get_result()->fetch_assoc();
 
-     $stmt = $conn->prepare("SELECT * FROM posts WHERE u_id = ? ORDER BY creation_time DESC LIMIT 5");
-     $stmt->bind_param('i', $user_id);
-     $stmt->execute();
+    $stmt = $conn->prepare("SELECT * FROM posts WHERE u_id = ? ORDER BY creation_time DESC LIMIT 5");
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
     $recent_posts = $stmt->get_result();
-}
+
+    $stmt = $conn->prepare("SELECT u.*, i.images, i.contentType FROM users u LEFT JOIN user_images i ON u.u_id = i.u_id WHERE u.u_id = ?");
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
+    $user_data = $stmt->get_result()->fetch_assoc();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +69,8 @@ if (isset($_SESSION['u_id'])) {
   <article id="center">
   <h1>My Profile</h1>
   <div class="profile-header">
-    <img src="<?php echo $user_data['profile_pic']; ?>" alt="Profile Picture" class="profile-picture">
+  <img src="data:<?php echo $user_data['contentType']; ?>;base64,<?php echo base64_encode($user_data['images']); ?>" alt="Profile Picture" class="profile-picture">
+
     <div>
       <h2 class="username"><?php echo $user_data['username']; ?></h2>
       <p class="bio"><?php echo $user_data['profile_bio']; ?></p>
@@ -105,8 +111,8 @@ if (isset($_SESSION['u_id'])) {
             <input type="text" class="form-control" id="username" name="username" value="<?php echo $user_data['username']; ?>" required>
           </div>
           <div class="form-group">
-            <label for="profile_picture">Profile Picture</label>
-            <input type="file" class="form-control" id="profile_picture" name="profile_picture">
+            <label for="user_images">Profile Picture</label>
+            <input type="file" class="form-control" id="user_images" name="user_images">
           </div>
           <div class="form-group">
             <label for="email">Email</label>
