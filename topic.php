@@ -83,7 +83,6 @@ session_start();
       <?php
       include "connection.php";
       $topicId = $_GET['id'];
-      // $sql = "SELECT posts.* FROM posts WHERE topic_id = $topicId ORDER BY post_id DESC";
       $sql = "SELECT posts.*, users.username FROM posts JOIN users ON posts.u_id = users.u_id WHERE topic_id = $topicId ORDER BY post_id DESC";
       $result = $conn->query($sql);
 
