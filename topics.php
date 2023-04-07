@@ -46,6 +46,14 @@ session_start();
    </article>
    <article id="center">
       <h2>All Topics</h2>
+      <form id="create-topic-form" action="create-topic.php" method="POST">
+        <div class="form-group">
+          <label for="topic_title">Topic Name:</label>
+          <input type="text" class="form-control" id="topic_title" name="topic_title" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Topic</button>
+      </form>
+      <br>
       <ul id="topics-list" class="list-group">
          <?php include 'get-topics.php'; ?>
       </ul>
@@ -58,4 +66,5 @@ session_start();
       <a href="#" class="linkbutton">FAQ</a>
       <p>&copy; <?php echo date('Y'); ?> COSC 360 Prompt Hub Group</p>
    </div>
-</footer>
+</footer
+>
