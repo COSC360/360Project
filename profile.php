@@ -32,16 +32,14 @@ if (isset($_SESSION['u_id'])) {
 
 <body>
 <header id="masthead">
-  <h1>Prompt Hub</h1>
+<a href="index.php" class="linkbutton"><img src="images/PromptHublogo.png" alt="logo" height="70"></a>
   <div class="right">
-    <?php if (isset($_SESSION['u_id'])): ?>
-        <a href="#" class="linkbutton">Notifications</a>
-        <a href="profile.php" class="linkbutton">My Profile</a>
-        <a href="logout.php" class="linkbutton">Logout</a>
-    <?php else: ?>
-        <a href="login-signup.php" class="linkbutton">Notifications</a>
-        <a href="login-signup.php" class="linkbutton">My Profile</a>
-    <?php endif; ?>
+  <?php if (isset($_SESSION['u_id'])): ?>
+         <button class="btn btn-primary"><a href="profile.php" >My Profile</a></button>
+         <button class="btn btn-primary"><a href="logout.php">Logout</a></button>
+      <?php else: ?>
+         <button class="btn btn-primary"><a href="login-signup.php">Login / Signup</a></button>
+      <?php endif; ?>
   </div>
 </header>
 <div id="main">
