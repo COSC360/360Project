@@ -46,6 +46,7 @@ session_start();
    </article>
    <article id="center">
       <h2>All Topics</h2>
+      <?php if (isset($_SESSION['admin_status']) && $_SESSION['admin_status'] == 1): ?>
       <form id="create-topic-form" action="create-topic.php" method="POST">
         <div class="form-group">
           <label for="topic_title">Topic Name:</label>
@@ -53,6 +54,7 @@ session_start();
         </div>
         <button type="submit" class="btn btn-primary">Create Topic</button>
       </form>
+      <?php endif; ?>
       <br>
       <ul id="topics-list" class="list-group">
          <?php include 'get-topics.php'; ?>
