@@ -19,7 +19,7 @@ if (!isset($_SESSION['u_id']) || !isset($_SESSION['admin_status']) || $_SESSION[
 </head>
 <body>
    <header id="masthead">
-      <h1>Prompt Hub</h1>
+   <a href="index.php" class="linkbutton"><img src="images/PromptHub.png" alt="logo" height="70"></a>
       <div class="right">
          <?php if (isset($_SESSION['u_id'])): ?>
             <a href="#" class="linkbutton">Notifications</a>
