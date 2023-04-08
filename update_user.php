@@ -56,17 +56,13 @@ if (isset($_SESSION['u_id']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
         mysqli_stmt_prepare($stmt, $sql);
     
         $null = NULL;
+
         mysqli_stmt_bind_param($stmt, "sbi", $imageFileType, $null, $user_id);
-        
-    
         mysqli_stmt_send_long_data($stmt, 1, $imagedata);
-    
+
         $result = mysqli_stmt_execute($stmt) or die(mysqli_stmt_error($stmt));
         
-
         mysqli_stmt_close($stmt); 
-
-        
 
         $stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, profile_bio = ? WHERE u_id = ?");
         $stmt->bind_param('sssi', $username, $email, $profile_bio, $user_id);

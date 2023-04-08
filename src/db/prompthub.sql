@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2023 at 11:20 PM
+-- Generation Time: Apr 08, 2023 at 02:33 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -41,8 +41,15 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`comment_id`, `post_id`, `topic_id`, `u_id`, `body`, `creation_time`) VALUES
-(0, 0, 0, 0, 'pussy', '2023-03-26 20:57:32'),
-(0, 0, 0, 0, '123', '2023-03-26 21:10:27');
+(1, 0, 0, 0, 'test', '2023-03-26 20:57:32'),
+(2, 0, 0, 0, '123', '2023-03-26 21:10:27'),
+(3, 0, 0, 3, 'test', '2023-03-26 21:29:31'),
+(4, 3, 0, 4, '', '2023-03-27 02:58:49'),
+(5, 3, 0, 4, 'dfdf', '2023-03-27 02:58:51'),
+(6, 5, 0, 4, 'tesst', '2023-03-27 03:45:39'),
+(7, 6, 0, 4, 'adsfasd', '2023-03-27 03:51:51'),
+(8, 6, 0, 4, 'rererer', '2023-03-27 03:51:54'),
+(9, 8, 0, 4, 'hello', '2023-04-04 22:40:54');
 
 -- --------------------------------------------------------
 
@@ -52,8 +59,20 @@ INSERT INTO `comments` (`comment_id`, `post_id`, `topic_id`, `u_id`, `body`, `cr
 
 CREATE TABLE `my_topics` (
   `topic_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `u_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `my_topics`
+--
+
+INSERT INTO `my_topics` (`topic_id`, `u_id`) VALUES
+(1, 4),
+(1, 4),
+(1, 4),
+(2, 4),
+(3, 4),
+(4, 4);
 
 -- --------------------------------------------------------
 
@@ -76,7 +95,14 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `u_id`, `topic_id`, `title`, `body`, `images`, `creation_time`) VALUES
-(0, 0, 0, 'tst', '123', '', '2023-03-26 19:11:16');
+(7, 0, 1, 'test', 'test', '', '2023-03-27 04:33:46'),
+(8, 0, 4, 'test1', 'test', '', '2023-04-04 22:40:31'),
+(9, 0, 1, 'etst', 'etst', '', '2023-04-04 22:58:01'),
+(10, 4, 4, 'test1', 'test1', '', '2023-04-04 23:49:37'),
+(11, 4, 1, 'test', 'test', '', '2023-04-04 23:59:21'),
+(12, 4, 10, 'test', 'test', '', '2023-04-07 22:56:16'),
+(13, 4, 3, 'poset', 't', '', '2023-04-07 23:00:56'),
+(14, 4, 4, 'test', 'testst', '', '2023-04-07 23:03:25');
 
 -- --------------------------------------------------------
 
@@ -94,7 +120,28 @@ CREATE TABLE `topics` (
 --
 
 INSERT INTO `topics` (`topic_id`, `topic_title`) VALUES
-(0, 'Test Topic');
+(1, 'Test Topic'),
+(2, 'test2'),
+(3, 'test3'),
+(4, 'topic4'),
+(5, ''),
+(6, ''),
+(7, 'testing'),
+(8, 'testing1'),
+(9, 'testttttt'),
+(10, 'tetet');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userimages`
+--
+
+CREATE TABLE `userimages` (
+  `userID` int(11) NOT NULL,
+  `contentType` varchar(255) NOT NULL,
+  `image` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -119,12 +166,23 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`u_id`, `username`, `email`, `email_confirmed`, `passw`, `profile_pic`, `profile_bio`, `created_at`, `admin_status`) VALUES
-(1, 'static', 'isaacjoseph2001@gmail.com', 0, '$2y$10$3zwz3WmvyV4b7//t3a1wlepLk00GgEwKN2R84YXYAUn5jKH3OcEMu', '', '', '2023-03-26 19:43:27', 0),
-(2, 'static1', 'isaacjoseph2001@gmail.com', 0, '$2y$10$CVLWwIPdgGlnEOMtVTqu/OoXyXw65tqoQdYvq7pXnvvF8VpygjGNa', '', '', '2023-03-26 21:11:44', 0);
+(2, 'static1', 'isaacjoseph2001@gmail.com', 0, '$2y$10$CVLWwIPdgGlnEOMtVTqu/OoXyXw65tqoQdYvq7pXnvvF8VpygjGNa', '', '', '2023-03-26 21:11:44', 0),
+(4, 'bobby', 'dfd@dfdf', 0, '$2y$10$E3Yc9hPE0b6fpWHMoH3FZ.RUjzjEallPRhl8AswjmIoHBAt8OfvS2', '', 'dfd', '2023-03-26 22:02:38', 1),
+(5, 'bobby', 'wilfred.meyer@ubc.ca', 0, '$2y$10$kdChWQskDstxzFiTE9xQnui8KKDEkS5CWJA7U6ccSBpSlVc5V4Rqi', '', '', '2023-03-26 22:02:55', 1),
+(6, 'bobby', 'asdf4e@dafs', 0, '$2y$10$NYtAjeUfzvsG6.tyooPVQe95blVhTFClov9F6BIDLQIWhoA.JjzuC', '', '', '2023-03-26 22:04:52', 0),
+(7, 'bobbyd', 'wilfredd.meyer@ubc.ca', 0, '$2y$10$9BtmAs5qhvWcaxI8ZslvUOn2d9MOm6BE9MsyfFdYECk5eGL6CyaSG', '', '', '2023-03-26 22:25:52', 0),
+(8, 'bobb yd', 'dsdf@dfdf', 0, '$2y$10$J6C.P15aIWiTBUS0FO5ET.PSMLNkWwjFKV3rRfY3Tk8Ugd8Zkmy/e', '', '', '2023-03-27 00:41:14', 0),
+(9, 'bobbydasf', 'wilfredmeyer1@gddmail.com', 0, '$2y$10$GbzRysYPkZDwghlvj37zM.irTzD2yxlcMLfiRduTw9cdybiay9S8i', './uploads/profile_pics/profile-picture-placeholder.png', '', '2023-03-27 03:41:33', 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`comment_id`);
 
 --
 -- Indexes for table `posts`
@@ -139,6 +197,13 @@ ALTER TABLE `topics`
   ADD PRIMARY KEY (`topic_id`);
 
 --
+-- Indexes for table `userimages`
+--
+ALTER TABLE `userimages`
+  ADD PRIMARY KEY (`userID`),
+  ADD KEY `userID` (`userID`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -149,10 +214,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `topics`
+--
+ALTER TABLE `topics`
+  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

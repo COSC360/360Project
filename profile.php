@@ -40,11 +40,11 @@ if (isset($_SESSION['u_id'])) {
 <a href="index.php" class="linkbutton"><img src="images/PromptHublogo.png" alt="logo" height="70"></a>
   <div class="right">
   <?php if (isset($_SESSION['u_id'])): ?>
-         <button class="btn btn-primary"><a href="profile.php" >My Profile</a></button>
-         <button class="btn btn-primary"><a href="logout.php">Logout</a></button>
-      <?php else: ?>
-         <button class="btn btn-primary"><a href="login-signup.php">Login / Signup</a></button>
-      <?php endif; ?>
+      <button class="btn btn-primary"><a href="profile.php" >My Profile</a></button>
+      <button class="btn btn-primary"><a href="logout.php">Logout</a></button>
+    <?php else: ?>
+      <button class="btn btn-primary"><a href="login-signup.php">Login / Signup</a></button>
+    <?php endif; ?>
   </div>
 </header>
 <div id="main">
@@ -53,9 +53,9 @@ if (isset($_SESSION['u_id'])) {
       <a href="index.php" class="linkbutton"><img src="images/house.png" alt="house" height="70">Home</a>
     </div>
     <?php if (isset($_SESSION['admin_status']) && $_SESSION['admin_status'] == 1): ?>
-    <div class="left">
-      <a href="admin.php" class="linkbutton"><img src="images/gear.png" alt="gear" height="70">Admin</a>
-    </div>
+      <div class="left">
+        <a href="admin.php" class="linkbutton"><img src="images/gear.png" alt="gear" height="70">Admin</a>
+      </div>
     <?php endif; ?>
     <div class="left">
       <a href="topics.php" class="linkbutton"><img src="images/topics.png" alt="topics" height="70">Topics</a>
@@ -67,8 +67,7 @@ if (isset($_SESSION['u_id'])) {
   <article id="center">
   <h1>My Profile</h1>
   <div class="profile-header">
-  <img src="data:<?php echo $user_data['contentType']; ?>;base64,<?php echo base64_encode($user_data['images']); ?>" alt="Profile Picture" class="profile-picture">
-
+    <img src="data:<?php echo $user_data['contentType']; ?>;base64,<?php echo base64_encode($user_data['images']); ?>" alt="Profile Picture" class="profile-picture">
     <div>
       <h2 class="username"><?php echo $user_data['username']; ?></h2>
       <p class="bio"><?php echo $user_data['profile_bio']; ?></p>
@@ -77,12 +76,31 @@ if (isset($_SESSION['u_id'])) {
   </div>
   <h2>Recent Posts</h2>
   <div id="recent-posts">
-    <?php while ($post = $recent_posts->fetch_assoc()): ?>
-        <div class="post">
-            <h3><?php echo $post['title']; ?></h3>
-            <p><?php echo $post['body']; ?></p>
+  <?php while ($post = $recent_posts->fetch_assoc()): ?>
+    <div class="post">
+      <h3><?php echo $post['title']; ?></h3>
+      <p><?php echo substr($post['body'], 0, 100); ?></p>
+      <a href="post.php?id=<?php echo $post['post_id']; ?>&topic_id=<?php echo $post['topic_id']; ?>" class="btn btn-primary">Read More</a>
     </div>
-    <?php endwhile; ?>
+    <div class="modal" tabindex="-1" role="dialog" id="post-modal-<?php echo $post['post_id']; ?>">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><?php echo $post['title']; ?></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><?php echo $post['body']; ?></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php endwhile; ?>
   </div>
   </article>
 </div>

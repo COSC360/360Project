@@ -43,57 +43,60 @@ session_start();
         </div>
     </article>
     <main id="center" class="col-md-9">
-    <?php
-    
-    include "connection.php";
-    $postId = $_GET['id'];
-    $topicId = $_GET['topic_id'];
-    
-    $sql = "SELECT posts.*, users.username FROM posts JOIN users ON posts.u_id = users.u_id WHERE post_id = $postId AND topic_id = $topicId";
-    $result = $conn->query($sql);
-    
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        echo '<div class="card mb-3">';
-        echo '<div class="card-header">';
-        echo '<span class="badge bg-secondary ms-2">Topic: <a href="topic.php?id=' . $row['topic_id'] . '">' . $row['title'] . '</a></span>';
-        echo '</div>';
-        echo '<div class="card-body">';
-        echo '<h5 class="card-title">' . $row['title'] . '</h5>';
-        echo '<p class="card-text">' . $row['body'] . '</p>';
-        echo '<p class="card-text"><small class="text-muted">By ' . $row['username'] . ' on ' . $row['creation_time'] . '</small></p>';
-        echo '</div></div>';
-    } else {
-        echo '<p>Post not found.</p>';
-    }
-    $sql = "SELECT comments.*, users.username FROM comments JOIN users ON comments.u_id = users.u_id WHERE post_id = $postId";
-    $result = $conn->query($sql);
-    
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
+        <?php
+        
+        include "connection.php";
+        $postId = $_GET['id'];
+        $topicId = $_GET['topic_id'];
+        
+        $sql = "SELECT posts.*, users.username FROM posts JOIN users ON posts.u_id = users.u_id WHERE post_id = ? AND topic_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $postId, $topicId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
             echo '<div class="card mb-3">';
+            echo '<div class="card-header">';
+            echo '<span class="badge bg-secondary ms-2">Topic: <a href="topic.php?id=' . $row['topic_id'] . '">' . $row['title'] . '</a></span>';
+            echo '</div>';
             echo '<div class="card-body">';
+            echo '<h5 class="card-title">' . $row['title'] . '</h5>';
             echo '<p class="card-text">' . $row['body'] . '</p>';
             echo '<p class="card-text"><small class="text-muted">By ' . $row['username'] . ' on ' . $row['creation_time'] . '</small></p>';
             echo '</div></div>';
+        } else {
+            echo '<p>Post not found.</p>';
         }
-    }
-    $conn->close();
-    ?>
-    <form id="comment-form" method="post" action="create-comment.php">
-        <input type="hidden" name="id" value="<?php echo $postId; ?>">
-        <input type="hidden" name="topic_id" value="<?php echo $topicId; ?>">
-   <?php if (isset($_SESSION['u_id'])): ?>
-    
-        <div class="mb-3">
-            <label for="comment" class="form-label">Leave a comment:</label>
-            <textarea class="form-control" id="comment" name="body" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" form="comment-form">Submit</button>
-   <?php else: ?>
-    <p>Please <a href="login-signup.php">log in</a> to comment.</p>
-   <?php endif; ?>
-    </form>
+        $sql = "SELECT comments.*, users.username FROM comments JOIN users ON comments.u_id = users.u_id WHERE post_id = $postId";
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<div class="card mb-3">';
+                echo '<div class="card-body">';
+                echo '<p class="card-text">' . $row['body'] . '</p>';
+                echo '<p class="card-text"><small class="text-muted">By ' . $row['username'] . ' on ' . $row['creation_time'] . '</small></p>';
+                echo '</div></div>';
+            }
+        }
+        $conn->close();
+        ?>
+        <form id="comment-form" method="post" action="create-comment.php">
+            <input type="hidden" name="id" value="<?php echo $postId; ?>">
+            <input type="hidden" name="topic_id" value="<?php echo $topicId; ?>">
+            <?php if (isset($_SESSION['u_id'])): ?>
+        
+            <div class="mb-3">
+                <label for="comment" class="form-label">Leave a comment:</label>
+                <textarea class="form-control" id="comment" name="body" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" form="comment-form">Submit</button>
+        <?php else: ?>
+        <p>Please <a href="login-signup.php">log in</a> to comment.</p>
+        <?php endif; ?>
+        </form>
     </main>
     </div>
     <footer class="bg-primary text-white text-center py-3">
@@ -103,5 +106,5 @@ session_start();
             <p>&copy; <?php echo date('Y'); ?> COSC 360 Prompt Hub Group</p>
         </div>
     </footer>
-    </body>
-    </html>
+</body>
+</html>
