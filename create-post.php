@@ -8,25 +8,23 @@ session_start();
     <meta charset="utf-8">
     <title>Create Post - COSC 360 Project</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/layout.css" />
+   <link rel="stylesheet" href="css/layout.css" />
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-   <header id="masthead">
-   <a href="index.php" class="linkbutton"><img src="images/PromptHub.png" alt="logo" height="70"></a>
-      <div class="right">
-         <?php if (isset($_SESSION['u_id'])): ?>
-            <a href="#" class="linkbutton">Notifications</a>
-            <a href="profile.php" class="linkbutton">My Profile</a>
-            <a href="logout.php" class="linkbutton">Logout</a>
-         <?php else: ?>
-            <a href="login-signup.php" class="linkbutton">Notifications</a>
-            <a href="login-signup.php" class="linkbutton">My Profile</a>
-         <?php endif; ?>
-      </div>
-   </header>
+<header id="masthead">
+<a href="index.php" class="linkbutton"><img src="images/PromptHublogo.png" alt="logo" height="70"></a>
+   <div class="right">
+   <?php if (isset($_SESSION['u_id'])): ?>
+         <button class="btn btn-primary"><a href="profile.php" >My Profile</a></button>
+         <button class="btn btn-primary"><a href="logout.php">Logout</a></button>
+      <?php else: ?>
+         <button class="btn btn-primary"><a href="login-signup.php">Login / Signup</a></button>
+      <?php endif; ?>
+   </div>
+</header>
    <div id="main">
       <article id="right-sidebar">
          <div class="left">
