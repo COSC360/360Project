@@ -14,7 +14,7 @@ if (isset($_SESSION['u_id']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
     if(isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["user_images"]["tmp_name"]);
+        $check = getimagesize($_FILES["user_images"]["topic_title"]);
         if($check !== false) {
             echo "File is an image - " . $check["mime"] . ".";
             $uploadOk = 1;
@@ -38,7 +38,6 @@ if (isset($_SESSION['u_id']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Sorry, your file was not uploaded.";
     } else {
         if (move_uploaded_file($_FILES["user_images"]["tmp_name"], $target_file)) {
-            echo "The file ". htmlspecialchars( basename( $_FILES["user_images"]["name"])). " has been uploaded.";
             $userImage = basename($_FILES["user_images"]["name"]);
             chmod($target_file, 0777);
         } else {
@@ -46,8 +45,23 @@ if (isset($_SESSION['u_id']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // check if user has uploaded a new image
+
     if (isset($userImage)) {
+    $content_type = $_FILES['user_images']['type'];
+    $stmt = $conn->prepare("SELECT * FROM user_images WHERE u_id = ?");
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $stmt = $conn->prepare("UPDATE user_images SET images = ?, contentType = ? WHERE u_id = ?");
+        $stmt->bind_param('ssi', $userImage, $content_type, $user_id);
+        $stmt->execute();
+    } else {
+        $stmt = $conn->prepare("INSERT INTO user_images (u_id, images, contentType) VALUES (?, ?, ?)");
+        $stmt->bind_param('iss', $user_id, $userImage, $content_type);
+        $stmt->execute();
+    }
         $imagedata = file_get_contents($target_file);
         
         $sql = "UPDATE user_images SET contentType=?, images=? WHERE u_id=?";
@@ -74,6 +88,7 @@ if (isset($_SESSION['u_id']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['success' => false]);
         }
         mysqli_close($conn);
+        exit;
     } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo "Invalid request.";
         exit;

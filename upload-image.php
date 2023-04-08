@@ -6,23 +6,28 @@ include 'connection.php';
 if (isset($_SESSION['u_id'])) {
     $user_id = $_SESSION['u_id'];
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE u_id = ?");
+    // Get the uploaded image data
+    $image = file_get_contents($_FILES['user_images']['tmp_name']);
+    $content_type = $_FILES['user_images']['type'];
+
+    // Check if the user already has an image stored in the database
+    $stmt = $conn->prepare("SELECT * FROM user_images WHERE u_id = ?");
     $stmt->bind_param('i', $user_id);
     $stmt->execute();
-    $user_data = $stmt->get_result()->fetch_assoc();
+    $result = $stmt->get_result();
 
-    $stmt = $conn->prepare("SELECT * FROM posts WHERE u_id = ? ORDER BY creation_time DESC LIMIT 5");
-    $stmt->bind_param('i', $user_id);
-    $stmt->execute();
-    $recent_posts = $stmt->get_result();    
-}
+    if ($result->num_rows > 0) {
+        // Update the existing user image
+        $stmt = $conn->prepare("UPDATE user_images SET images = ?, contentType = ? WHERE u_id = ?");
+        $stmt->bind_param('ssi', $image, $content_type, $user_id);
+        $stmt->execute();
+    } else {
+        // Insert a new user image
+        $stmt = $conn->prepare("INSERT INTO user_images (u_id, images, contentType) VALUES (?, ?, ?)");
+        $stmt->bind_param('iss', $user_id, $image, $content_type);
+        $stmt->execute();
+    }
 
-if (isset($_FILES['image'])) {
-    $image = $_FILES['image']['tmp_name'];
-    $image = addslashes(file_get_contents($image));
-    
-    $stmt = $conn->prepare("INSERT INTO images (user_id, image) VALUES (?, ?)");
-    $stmt->bind_param('is', $user_id, $image);
-    $stmt->execute();
+    header('Location: profile.php');
 }
 ?>
