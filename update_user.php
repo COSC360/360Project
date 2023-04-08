@@ -8,7 +8,7 @@ if (isset($_SESSION['u_id']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $profile_bio = $_POST['bio'];
 
-    $target_dir = "./uploads/profile_pics/";
+    $target_dir = "/home/wmeyer/public_html/360Project/uploads/profile_pics";
     $target_file = $target_dir . basename($_FILES["user_images"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
